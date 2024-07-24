@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Home, Book, Mail, Ticket, User, Car } from 'lucide-react';
 import axios from 'axios';
 import { FaSun, FaMoon } from 'react-icons/fa';
-import VehicleList from '../features/vehicle';
+// import VehicleList from '../features/vehicle';
 // import BookingManagementComponent from './userbookings';
 // import TicketManagementComponent from './usertickets'
 
@@ -157,7 +157,7 @@ const UserSidebar: React.FC = () => {
       </div>
       <div className="flex-grow p-6 grid grid-cols-1 gap-4 overflow-y-auto">
         <div id="carlist" className="bg-gray-100 p-4 rounded shadow">
-           <VehicleList/>
+           {/* <VehicleList/> */}
         </div>
         <div id="bookings" className="bg-gray-100 p-4 rounded shadow">
           {/* <BookingManagementComponent/> */}
