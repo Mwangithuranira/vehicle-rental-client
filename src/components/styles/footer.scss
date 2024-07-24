@@ -1,0 +1,33 @@
+
+
+
+.footer {
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      .company{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 20px 0;
+          .car-info-list{
+            display: flex;
+
+            
+          }
+       
+      }
+       
+
+              .section-b{
+                display: flex;
+                flex-direction: row;
+    
+    }
+    }
+  }
+  

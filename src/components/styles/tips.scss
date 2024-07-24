@@ -1,0 +1,153 @@
+$primary-color: #4a90e2;
+$highlight-color: #f39c12;
+$light-color: #ecf0f1;
+$dark-color: #2c3e50;
+$white-color: #ffffff;
+$box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+$hover-box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+$transition-duration: 0.3s;
+
+body.dark-mode {
+  background-color: $dark-color;
+  color: $white-color;
+
+  .title,
+  .tip-title,
+  .tip-description {
+    color: $white-color;
+  }
+
+  .tip-item {
+    background-color: lighten($dark-color, 5%);
+    border-color: lighten($dark-color, 10%);
+
+    .tip-icon {
+      color: $highlight-color;
+    }
+
+    &:hover {
+      box-shadow: $hover-box-shadow;
+      transform: translateY(-5px);
+      background-color: lighten($dark-color, 10%);
+    }
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
+}
+
+.title {
+  font-size: 1.5rem;
+  font-style: italic;
+  color: $dark-color;
+  margin-bottom: 2rem;
+  transition: color $transition-duration;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: $light-color;
+  border-radius: 10px;
+  box-shadow: $box-shadow;
+  transform: translateY(-10px);
+
+  &:hover {
+    color: $highlight-color;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.25rem;
+  }
+}
+
+.tips-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  @media (max-width: 768px) {
+    gap: 1rem;
+  }
+}
+
+.tip-item {
+  display: flex;
+  align-items: center;
+  background-color: $white-color;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: $box-shadow;
+  transition: transform $transition-duration, box-shadow $transition-duration;
+  text-align: left;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: $hover-box-shadow;
+  }
+
+  .tip-icon {
+    font-size: 2.5rem;
+    margin-right: 1rem;
+
+    @media (max-width: 768px) {
+      font-size: 2rem;
+      margin-right: 0.5rem;
+    }
+  }
+
+  .tip-content {
+    .tip-title {
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: $dark-color;
+      margin-bottom: 0.5rem;
+      transition: color $transition-duration;
+
+      &:hover {
+        color: $highlight-color;
+      }
+
+      @media (max-width: 768px) {
+        font-size: 1rem;
+      }
+    }
+
+    .tip-description {
+      color: $dark-color;
+      transition: color $transition-duration;
+
+      &:hover {
+        color: $highlight-color;
+      }
+
+      @media (max-width: 768px) {
+        font-size: 0.875rem;
+      }
+    }
+  }
+}
+
+body.dark-mode .title {
+  color: $white-color;
+  background-color: $dark-color;
+}
+
+body.dark-mode .tip-item .tip-title,
+body.dark-mode .tip-item .tip-description {
+  color: $white-color;
+}
+
+body.dark-mode .tip-item {
+  background-color: $dark-color;
+  border-color: lighten($dark-color, 10%);
+}
+
+body.dark-mode .tip-item:hover {
+  background-color: lighten($dark-color, 10%);
+}

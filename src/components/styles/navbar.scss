@@ -1,0 +1,209 @@
+$primary-color: #4a90e2;
+$dark-color: #2c3e50;
+$light-color: #ecf0f1;
+$highlight-color: #f39c12;
+$white-color: #ffffff;
+$transition-duration: 0.3s;
+$box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+$hover-box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+
+body.dark-mode {
+  background-color: $dark-color;
+  color: $light-color;
+
+  .navbar {
+    background-color: $dark-color;
+    color: $light-color;
+
+    .navbar-links a {
+      color: $light-color;
+    }
+
+    .navbar-dropdown .dropdown-menu {
+      background-color: $dark-color;
+      color: $light-color;
+    }
+
+    .toggle-mode-button {
+      background-color: $highlight-color;
+      color: $dark-color;
+
+      .icon {
+        color: $dark-color;
+      }
+    }
+  }
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: $primary-color;
+  color: $white-color;
+  font-family: 'Roboto', sans-serif;
+  box-shadow: $box-shadow;
+  transition: background-color $transition-duration, box-shadow $transition-duration;
+
+  &:hover {
+    background-color: lighten($primary-color, 10%);
+    box-shadow: $hover-box-shadow;
+  }
+
+  .navbar-logo {
+    display: flex;
+    align-items: center;
+
+    .logo-img {
+      width: 50px;
+      margin-right: 1rem;
+      box-shadow: $box-shadow;
+    }
+
+    span {
+      font-size: 1.5rem;
+      font-weight: bold;
+      box-shadow: $box-shadow;
+    }
+  }
+
+  .navbar-links {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      margin: 0 1.5rem;
+      box-shadow: $box-shadow;
+
+      a {
+        color: $white-color;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        transition: background-color $transition-duration, color $transition-duration, box-shadow $transition-duration;
+
+        &:hover {
+          background-color: lighten($primary-color, 10%);
+          color: $highlight-color;
+          box-shadow: $hover-box-shadow;
+        }
+      }
+    }
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: center;
+
+      li {
+        margin: 0.5rem 0;
+      }
+    }
+  }
+
+  .navbar-controls {
+    display: flex;
+    align-items: center;
+    box-shadow: $box-shadow;
+
+    .navbar-dropdown {
+      position: relative;
+      margin-right: 1rem;
+
+      .dropdown-button {
+        background-color: $highlight-color;
+        color: $dark-color;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color $transition-duration, box-shadow $transition-duration;
+
+        &:hover {
+          background-color: darken($highlight-color, 10%);
+          box-shadow: $hover-box-shadow;
+        }
+      }
+
+      .dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: $light-color;
+        color: $dark-color;
+        list-style: none;
+        padding: 0.5rem 0;
+        margin: 0;
+        border-radius: 5px;
+        box-shadow: $box-shadow;
+        transition: background-color $transition-duration, box-shadow $transition-duration;
+
+        li {
+          padding: 0.5rem 1rem;
+          cursor: pointer;
+          transition: background-color $transition-duration, box-shadow $transition-duration;
+
+          &:hover {
+            background-color: $highlight-color;
+            color: $dark-color;
+            box-shadow: $hover-box-shadow;
+          }
+        }
+      }
+
+      &:hover .dropdown-menu {
+        display: block;
+      }
+    }
+
+    .toggle-mode-button {
+      background-color: $highlight-color;
+      color: $dark-color;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color $transition-duration, box-shadow $transition-duration;
+      box-shadow: $box-shadow;
+
+      &:hover {
+        background-color: darken($highlight-color, 10%);
+        box-shadow: $hover-box-shadow;
+      }
+
+      .icon {
+        color: $dark-color;
+        transition: color $transition-duration;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+
+    .navbar-links {
+      display: none;
+    }
+
+    .navbar-controls {
+      margin-top: 1rem;
+    }
+  }
+}
+
+body {
+  &.en {
+    font-family: 'Roboto', sans-serif;
+  }
+
+  &.es {
+    font-family: 'Arial', sans-serif;
+  }
+
+  &.fr {
+    font-family: 'Times New Roman', serif;
+  }
+}

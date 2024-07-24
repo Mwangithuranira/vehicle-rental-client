@@ -1,0 +1,130 @@
+$primary-color: #4a90e2;
+$highlight-color: #f39c12;
+$light-color: #ecf0f1;
+$dark-color: #2c3e50;
+$white-color: #ffffff;
+$gray-color: #cccccc;
+$hover-color: #3498db; // Blue color for hover effect
+
+.faqs-container {
+  @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap');
+  font-family: 'Open Sans', sans-serif;
+  max-width: 90%; // Adjusted to occupy 90% of the screen horizontally
+  margin: 0 auto;
+  padding: 20px;
+  background-color: $light-color;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+
+  @media (min-width: 640px) {
+    padding: 20px 40px; // Increased padding for larger screens
+  }
+
+  .dark-mode & {
+    background-color: $dark-color;
+    color: $white-color;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.faqs-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 2.5rem;
+  text-align: center;
+  color: $dark-color;
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.faqs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.faq-item {
+  background-color: $white-color;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 1.5rem;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+  position: relative; // Added position for hover effect
+  max-width: 90%; // Adjusted max-width to occupy 90% of the screen horizontally
+  margin: 0 auto; // Center the faq-item horizontally
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
+
+  .faq-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .question-text {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: $dark-color;
+      flex: 1;
+
+      @media (max-width: 768px) {
+        font-size: 1.25rem;
+      }
+    }
+
+    .toggle-icon {
+      color: $primary-color;
+      transition: transform 0.3s;
+      position: absolute;
+      right: 1.5rem; // Adjusted position to the right side
+
+      @media (max-width: 768px) {
+        position: static; // Revert position for smaller screens
+        margin-left: 1rem;
+      }
+    }
+
+    &.open .toggle-icon {
+      transform: rotate(180deg);
+    }
+  }
+
+  .answer-text {
+    margin-top: 1rem;
+    font-size: 1.125rem;
+    color: $gray-color;
+  }
+
+  &:hover {
+    background-color: $hover-color; // Changed hover color to blue
+    color: $white-color; // Changed text color to white on hover
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .dark-mode & {
+    background-color: $dark-color;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    .question-text,
+    .answer-text {
+      color: $white-color;
+    }
+  }
+}
+
+body.dark-mode {
+  background-color: $dark-color;
+  color: $white-color;
+
+  .faqs-container {
+    background-color: $dark-color;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+}

@@ -1,0 +1,135 @@
+$primary-color: #4a90e2;
+$highlight-color: #f39c12;
+$light-color: #ecf0f1;
+$dark-color: #2c3e50;
+$white-color: #ffffff;
+$gray-color: #cccccc;
+$star-size: 24px; // Size of the star icons
+
+.review-container {
+  padding: 1.5rem;
+
+  .review-title {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: $dark-color;
+    transition: color 0.3s;
+
+    @media (max-width: 768px) {
+      font-size: 1.5rem;
+    }
+  }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .review-card {
+    background-color: $white-color;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    color: $dark-color;
+
+    &:hover {
+      transform: translateY(-5px) rotateY(5deg);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .review-content {
+      padding: 1.5rem;
+
+      .review-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+
+        .review-user-image {
+          width: 3.5rem;
+          height: 3.5rem;
+          border-radius: 50%;
+          margin-right: 1rem;
+          object-fit: cover;
+        }
+
+        .review-user-details {
+          .review-user-name {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: $dark-color;
+            transition: color 0.3s;
+
+            &:hover {
+              color: $highlight-color;
+            }
+
+            @media (max-width: 768px) {
+              font-size: 1rem;
+            }
+          }
+
+          .review-date {
+            font-size: 0.875rem;
+            color: $gray-color;
+            margin-top: 0.25rem;
+          }
+        }
+      }
+
+      .review-stars {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.75rem;
+
+        .star-icon {
+          width: $star-size;
+          height: $star-size;
+          fill: $highlight-color;
+          transition: fill 0.3s;
+
+          &:not(:last-child) {
+            margin-right: 4px;
+          }
+        }
+      }
+
+      .review-comment {
+        font-size: 0.9375rem;
+        color: $dark-color;
+        margin-top: 1rem;
+      }
+    }
+  }
+
+  body.dark-mode {
+    background-color: $dark-color;
+    color: $white-color;
+
+    .review-card {
+      background-color: $dark-color; // Set background to default dark mode color
+      border-color: lighten($dark-color, 10%);
+      color: $white-color;
+
+      .review-user-name,
+      .review-date,
+      .review-comment {
+        color: $white-color;
+      }
+
+      &:hover {
+        transform: translateY(-5px) rotateY(5deg);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        background-color: lighten($dark-color, 10%);
+      }
+    }
+  }
+}
