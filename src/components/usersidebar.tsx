@@ -4,7 +4,7 @@ import { Home, Book, Mail, Ticket, User, Car } from 'lucide-react';
 import axios from 'axios';
 import { FaSun, FaMoon } from 'react-icons/fa';
 import VehicleList from '../features/vehicle';
-import BookingManagementComponent from './userbookings';
+// import BookingManagementComponent from './userbookings';
 // import TicketManagementComponent from './usertickets'
 
 // Types for user and role
@@ -160,7 +160,7 @@ const UserSidebar: React.FC = () => {
            <VehicleList/>
         </div>
         <div id="bookings" className="bg-gray-100 p-4 rounded shadow">
-          <BookingManagementComponent/>
+          {/* <BookingManagementComponent/> */}
         </div>
         <div id="tickets" className="bg-gray-100 p-4 rounded shadow">
           {/* <TicketManagementComponent/> */}
