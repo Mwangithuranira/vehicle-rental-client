@@ -16,6 +16,7 @@ interface BookingDetails {
   contact_phone: string;
   return_date: string;
 }
+//
 
 const StripeCheckoutForm: React.FC = () => {
   const stripe = useStripe();
