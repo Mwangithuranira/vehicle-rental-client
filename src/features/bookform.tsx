@@ -46,7 +46,7 @@ const BookForm = () => {
       try {
         const token = localStorage.getItem("authToken");
 
-        const locationsResponse = await axios.get("http://localhost:8000/api/locations", {
+        const locationsResponse = await axios.get("https://car-rental-dtbfg2hfd7abagfu.eastus-01.azurewebsites.net/api/locations", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -57,7 +57,7 @@ const BookForm = () => {
           throw new Error("Locations data is not an array.");
         }
 
-        const vehiclesResponse = await axios.get("http://localhost:8000/api/vehicles", {
+        const vehiclesResponse = await axios.get("https://car-rental-dtbfg2hfd7abagfu.eastus-01.azurewebsites.net/api/vehicles", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -125,7 +125,7 @@ const BookForm = () => {
     try {
       const token = localStorage.getItem("authToken");
 
-      const bookingResponse = await axios.post("http://localhost:8000/api/bookings", bookingDetails, {
+      const bookingResponse = await axios.post("https://car-rental-dtbfg2hfd7abagfu.eastus-01.azurewebsites.net/api/bookings", bookingDetails, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -135,7 +135,7 @@ const BookForm = () => {
       console.log(bookingId);
 
       const paymentResponse = await axios.post(
-        "http://localhost:8000/api/payments",
+        "https://car-rental-dtbfg2hfd7abagfu.eastus-01.azurewebsites.net/api/payments",
         {
           bookingId: bookingId,
           amount: totalAmount,

@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:8000/api',
+  baseURL: 'https://car-rental-dtbfg2hfd7abagfu.eastus-01.azurewebsites.net/api',
 });
 
 // Intercept requests to add authorization token

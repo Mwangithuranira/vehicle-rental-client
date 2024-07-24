@@ -61,7 +61,7 @@ const Register: React.FC = () => {
         image_url: formData.image || 'https://randomuser.me/api/portraits/men/1.jpg' // Default image URL
       };
 
-      const response = await axios.post('http://localhost:8000/auth/register', data, {
+      const response = await axios.post('https://car-rental-dtbfg2hfd7abagfu.eastus-01.azurewebsites.net/auth/register', data, {
         headers: {
           'Content-Type': 'application/json',
         },

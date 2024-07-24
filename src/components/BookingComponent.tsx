@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8000/api';
+const API_URL = 'https://car-rental-dtbfg2hfd7abagfu.eastus-01.azurewebsites.net/api';
 
 // Default Axios instance with Authorization header
 const axiosInstance = axios.create({

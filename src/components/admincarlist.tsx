@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8000/api';
+const API_URL = 'https://car-rental-dtbfg2hfd7abagfu.eastus-01.azurewebsites.net/api';
 
 const axiosInstance = axios.create({
   baseURL: API_URL,
@@ -101,14 +101,14 @@ const ManageVehiclesComponent: React.FC = () => {
     e.preventDefault();
     try {
       if (editMode) {
-        await axios.put(`http://localhost:8000/api/vehicles/${editVehicleId}`, newVehicle, {
+        await axios.put(`https://car-rental-dtbfg2hfd7abagfu.eastus-01.azurewebsites.net/api/vehicles/${editVehicleId}`, newVehicle, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`, // Adjust token retrieval as needed
             'Content-Type': 'application/json',
           },
         });
       } else {
-        await axios.post('http://localhost:8000/api/vehicles', newVehicle, {
+        await axios.post('https://car-rental-dtbfg2hfd7abagfu.eastus-01.azurewebsites.net/api/vehicles', newVehicle, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`, // Adjust token retrieval as needed
             'Content-Type': 'application/json',
@@ -133,7 +133,7 @@ const ManageVehiclesComponent: React.FC = () => {
 
   const handleDelete = async (id: number) => {
     try {
-      await axios.delete(`http://localhost:8000/api/vehicles/${id}`, {
+      await axios.delete(`https://car-rental-dtbfg2hfd7abagfu.eastus-01.azurewebsites.net/api/vehicles/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`, // Adjust token retrieval as needed
         },

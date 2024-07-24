@@ -30,7 +30,7 @@ const Login: React.FC = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:8000/auth/login', formData, {
+      const response = await axios.post('https://car-rental-dtbfg2hfd7abagfu.eastus-01.azurewebsites.net/auth/login', formData, {
         headers: { 'Content-Type': 'application/json' },
       });
 
