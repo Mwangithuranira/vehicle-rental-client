@@ -41,7 +41,7 @@ const Login: React.FC = () => {
       localStorage.setItem('authToken', token.token);
       localStorage.setItem('userId', token.user[0]);
       localStorage.setItem('userRole', role);
-      console.log('Login success:', token.user);
+      console.log('Login success:', token.user); // Debugging: Check the user object
 
       if (role === 'admin') {
         navigate('/admin'); // Redirect to admin dashboard

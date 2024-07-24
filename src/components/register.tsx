@@ -65,7 +65,7 @@ const Register: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-      });
+      });  // Register the user
 
       if (response.status === 201) {
         navigate('/login');
