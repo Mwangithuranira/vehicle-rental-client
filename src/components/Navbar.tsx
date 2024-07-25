@@ -50,9 +50,15 @@ const Navbar: React.FC = () => {
   return (
     <nav className={`flex justify-between items-center p-1.5 lg:p-2 mx-auto ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 text-white'} shadow-lg transition-all duration-300`}>
       <div className="flex items-center">
-        <img src="/logo.png" alt="Company Logo" className="w-8 h-8 mr-2 rounded-full shadow-lg" />
-        <span className="text-lg font-bold">{t('logoText')}</span>
+        {/* KeBest Logo */}
+        <div className={`flex items-center ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 text-white'} p-1 rounded-full shadow-lg`}>
+          <div className={`w-10 h-10 ${isDarkMode ? 'bg-gray-800' : 'bg-white'} rounded-full flex items-center justify-center shadow-lg`}>
+            <span className={`${isDarkMode ? 'text-white' : 'text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-blue-500 to-purple-600'} font-extrabold text-2xl`}>K</span>
+          </div>
+          <span className="text-lg font-bold ml-2">KeBest</span>
+        </div>
       </div>
+
       <ul className="flex space-x-1 lg:space-x-2 text-sm lg:text-md">
         <li><button onClick={() => handleNavigation('hero')} className="hover:bg-blue-700 hover:text-orange-500 px-2 py-1 rounded transition-colors duration-300">{t('search')}</button></li>
         <li><button onClick={() => handleNavigation('carlist')} className="hover:bg-blue-700 hover:text-orange-500 px-2 py-1 rounded transition-colors duration-300">{t('deals')}</button></li>
@@ -63,12 +69,13 @@ const Navbar: React.FC = () => {
         <li><button onClick={() => handleNavigation('stats')} className="hover:bg-blue-700 hover:text-orange-500 px-2 py-1 rounded transition-colors duration-300">{t('companyStatistics')}</button></li>
         <li><button onClick={() => navigate('/login')} className="hover:bg-blue-700 hover:text-orange-500 px-2 py-1 rounded transition-colors duration-300">{t('loginRegister')}</button></li>
       </ul>
+
       <div className="flex items-center space-x-2 lg:space-x-3 relative">
         <button
           className="bg-yellow-500 text-gray-900 px-2 py-1 rounded-full shadow-lg hover:bg-yellow-400 transition-colors duration-300"
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
         >
-          {t('choseLanguage')}
+          {t('chooseLanguage')}
         </button>
         {isDropdownOpen && (
           <ul className="absolute top-full right-0 mt-2 bg-white text-gray-900 shadow-lg rounded-lg overflow-hidden z-50">
