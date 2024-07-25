@@ -29,7 +29,7 @@ const UserSidebar: React.FC = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.post('/api/logout', {}, {
+      await axios.post('https://car-rental-dtbfg2hfd7abagfu.eastus-01.azurewebsites.net/api/logout', {}, {
         headers: {
           Authorization: `Bearer ${getToken()}`
         }
@@ -59,7 +59,7 @@ const UserSidebar: React.FC = () => {
   const handleSaveProfile = async () => {
     if (editedUser) {
       try {
-        await axios.put(`/api/user/${editedUser.id}`, editedUser, {
+        await axios.put(`https://car-rental-dtbfg2hfd7abagfu.eastus-01.azurewebsites.net/api/user/${editedUser.id}`, editedUser, {
           headers: {
             Authorization: `Bearer ${getToken()}`
           }
