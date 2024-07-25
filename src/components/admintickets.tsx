@@ -4,15 +4,14 @@ import axios from 'axios';
 // Define the Ticket interface
 interface Ticket {
   id: string;
-  subject: string;
-  user:{
+  ticket_subject: string;  // ticket_subject
+  ticket_description: string;  // ticket_description
+  user?: {  // Optional user object
     full_name: string;
+    phone_number?: string;  // Optional field
+    address?: string;  // Optional field
     email: string;
-  }
-  description: string;
-  status: string;
-  created_at: string;
-  updated_at: string;
+  };
 }
 
 const CustomerTicketsComponent: React.FC = () => {
@@ -58,24 +57,22 @@ const CustomerTicketsComponent: React.FC = () => {
             <th className="px-4 py-2 border-b">ID</th>
             <th className="px-4 py-2 border-b">Full Name</th>
             <th className="px-4 py-2 border-b">Email</th>
-            <th className="px-4 py-2 border-b">subject</th>
-            <th className="px-4 py-2 border-b">description</th>
-            <th className="px-4 py-2 border-b">Status</th>
-            <th className="px-4 py-2 border-b">Created At</th>
-            <th className="px-4 py-2 border-b">Updated At</th>
+            <th className="px-4 py-2 border-b">Phone Number</th>
+            <th className="px-4 py-2 border-b">Address</th>
+            <th className="px-4 py-2 border-b">Subject</th>
+            <th className="px-4 py-2 border-b">Description</th>
           </tr>
         </thead>
         <tbody>
           {tickets.map(ticket => (
             <tr key={ticket.id}>
               <td className="border px-4 py-2">{ticket.id}</td>
-              <td className="border px-4 py-2">{ticket.user.full_name}</td>
-              <td className="border px-4 py-2">{ticket.user.email}</td>
-              <td className="border px-4 py-2">{ticket.subject}</td>
-              <td className="border px-4 py-2">{ticket.description}</td>
-              <td className="border px-4 py-2">{ticket.status}</td>
-              <td className="border px-4 py-2">{ticket.created_at}</td>
-              <td className="border px-4 py-2">{ticket.updated_at}</td>
+              <td className="border px-4 py-2">{ticket.user?.full_name || 'N/A'}</td>
+              <td className="border px-4 py-2">{ticket.user?.email || 'N/A'}</td>
+              <td className="border px-4 py-2">{ticket.user?.phone_number || 'N/A'}</td>
+              <td className="border px-4 py-2">{ticket.user?.address || 'N/A'}</td>
+              <td className="border px-4 py-2">{ticket.ticket_subject}</td>
+              <td className="border px-4 py-2">{ticket.ticket_description}</td>
             </tr>
           ))}
         </tbody>
