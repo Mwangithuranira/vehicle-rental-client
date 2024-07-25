@@ -35,27 +35,13 @@ const UserManagementComponent: React.FC = () => {
   const fetchUsers = async () => {
     try {
       const response = await axiosInstance.get('/users');
-      
-      // Log the entire response to verify its structure
-      console.log('API Response:', response);
-      
-      // Ensure the response data is an array
-      if (Array.isArray(response.data)) {
-        const fetchedUsers: User[] = response.data;
-        
-        // Log the fetched users to verify their structure
-        console.log('Fetched Users:', fetchedUsers);
-        
-        setUsers(fetchedUsers);
-      } else {
-        console.error('Unexpected response data format:', response.data);
-      }
+      // Ensure the data matches the expected type
+      const fetchedUsers: User[] = response.data;
+      setUsers(fetchedUsers);
     } catch (error) {
-      // Log detailed error information
-      console.error('Error fetching users:', (error as Error).response?.data || (error as Error).message || error);
+      console.error('Error fetching users', error);
     }
   };
-  
 
   // Create or update user
   const handleCreateOrUpdate = async () => {
