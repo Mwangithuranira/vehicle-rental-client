@@ -3,8 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Home, Book, Mail, Ticket, User, Car } from 'lucide-react';
 import axios from 'axios';
 import { FaSun, FaMoon } from 'react-icons/fa';
-// import VehicleList from '../features/vehicle';
-// import BookingManagementComponent from './userbookings';
+import VehicleList from '../features/vehicle';
+import BookingManagementComponent from './userbookings';
 // import TicketManagementComponent from './usertickets'
 
 // Types for user and role
@@ -157,10 +157,10 @@ const UserSidebar: React.FC = () => {
       </div>
       <div className="flex-grow p-6 grid grid-cols-1 gap-4 overflow-y-auto">
         <div id="carlist" className="bg-gray-100 p-4 rounded shadow">
-           {/* <VehicleList/> */}
+           <VehicleList/>
         </div>
         <div id="bookings" className="bg-gray-100 p-4 rounded shadow">
-          {/* <BookingManagementComponent/> */}
+          <BookingManagementComponent/>
         </div>
         <div id="tickets" className="bg-gray-100 p-4 rounded shadow">
           {/* <TicketManagementComponent/> */}
@@ -195,7 +195,7 @@ const UserSidebar: React.FC = () => {
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-gray-700">Image URL</label>
+                <label className="block text-white-700">Image URL</label>
                 <input
                   type="text"
                   title='imageUrl'

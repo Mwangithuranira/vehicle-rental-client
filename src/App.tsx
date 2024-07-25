@@ -8,6 +8,7 @@ import Admin from './pages/Admin';
 import Loginuser from './pages/login';
 import User from './pages/User';
 import BookForm from './features/bookform';
+import UpdateProfile from './components/userprofile'
 // import StripeCheckoutForm from './features/stripeform';
 // import other components as needed
 
@@ -48,6 +49,11 @@ const App: React.FC = () => {
       element: <Register />,
       errorElement: <Error />,
     },
+
+    {
+      path:'/update-profile',
+      element: <UpdateProfile/>,
+    }
     // Add additional routes if needed
   ]);
 

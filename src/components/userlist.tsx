@@ -1,20 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosInstance from '../instance';  // Adjust the import path based on your file structure
 
-const API_URL = 'https://car-rental-dtbfg2hfd7abagfu.eastus-01.azurewebsites.net/api';
-
-const axiosInstance = axios.create({
-  baseURL: API_URL,
-});
-
-axiosInstance.interceptors.request.use((config) => {
-  const token = localStorage.getItem('authToken');
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-});
-
+// Define User type
 type User = {
   id: number;
   full_name: string;
@@ -22,25 +9,7 @@ type User = {
   role: string;
   address: string;
   email: string;
-  image_url: string; // Ensure this is a valid image URL
-  bookings: Booking[];
-  customerSupportTickets: SupportTicket[];
-  password?: string;
-};
-
-type Booking = {
-  id: number;
-  booking_date: string;
-  return_date: string;
-  total_amount: number;
-  booking_status: string;
-};
-
-type SupportTicket = {
-  id: number;
-  ticket_subject: string;
-  ticket_description: string;
-  ticket_status: string;
+  image_url?: string;  // Optional field
 };
 
 const UserManagementComponent: React.FC = () => {
@@ -56,32 +25,53 @@ const UserManagementComponent: React.FC = () => {
     phone_number: '',
     image_url: 'https://randomuser.me/api/portraits/men/1.jpg',
     role: '',
-    password: '',
   });
 
   useEffect(() => {
     fetchUsers();
   }, []);
 
+  // Fetch users from API
   const fetchUsers = async () => {
     try {
       const response = await axiosInstance.get('/users');
-      setUsers(response.data);
+      
+      // Log the entire response to verify its structure
+      console.log('API Response:', response);
+      
+      // Ensure the response data is an array
+      if (Array.isArray(response.data)) {
+        const fetchedUsers: User[] = response.data;
+        
+        // Log the fetched users to verify their structure
+        console.log('Fetched Users:', fetchedUsers);
+        
+        setUsers(fetchedUsers);
+      } else {
+        console.error('Unexpected response data format:', response.data);
+      }
     } catch (error) {
-      console.error('Error fetching users', error);
+      // Log detailed error information
+      console.error('Error fetching users:', (error as Error).response?.data || (error as Error).message || error);
     }
   };
+  
 
+  // Create or update user
   const handleCreateOrUpdate = async () => {
     try {
+      if (!newUser.full_name || !newUser.email || !newUser.address || !newUser.phone_number || !newUser.role) {
+        alert('Please fill in all required fields');
+        return;
+      }
+
       const payload = {
         full_name: newUser.full_name,
         email: newUser.email,
         address: newUser.address,
         phone_number: newUser.phone_number,
-        image_url: newUser.image_url,
+        image_url: newUser.image_url || 'https://randomuser.me/api/portraits/men/1.jpg',  // Default image if not provided
         role: newUser.role,
-        password: newUser.password,
       };
 
       if (editMode && currentUserId !== null) {
@@ -98,7 +88,6 @@ const UserManagementComponent: React.FC = () => {
         phone_number: '',
         image_url: 'https://randomuser.me/api/portraits/men/1.jpg',
         role: '',
-        password: '',
       });
       setShowAddForm(false);
       setEditMode(false);
@@ -108,11 +97,13 @@ const UserManagementComponent: React.FC = () => {
     }
   };
 
+  // Handle input changes for form fields
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setNewUser((prev) => ({ ...prev, [name]: value }));
   };
 
+  // Prepare for user editing
   const handleEdit = (user: User) => {
     setNewUser(user);
     setEditMode(true);
@@ -120,6 +111,7 @@ const UserManagementComponent: React.FC = () => {
     setCurrentUserId(user.id);
   };
 
+  // Handle user deletion
   const handleDelete = async (id: number) => {
     try {
       await axiosInstance.delete(`/users/${id}`);
@@ -129,6 +121,7 @@ const UserManagementComponent: React.FC = () => {
     }
   };
 
+  // Filter users based on search query
   const filteredUsers = users.filter((user) => {
     const fullName = user.full_name || '';
     const address = user.address || '';
@@ -163,7 +156,6 @@ const UserManagementComponent: React.FC = () => {
               phone_number: '',
               image_url: 'https://randomuser.me/api/portraits/men/1.jpg',
               role: '',
-              password: '',
             });
           }}
         >
@@ -222,14 +214,6 @@ const UserManagementComponent: React.FC = () => {
             value={newUser.role || ''}
             onChange={handleInputChange}
           />
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            className="p-3 border rounded-lg mb-3 w-full bg-gray-50 text-black"
-            value={newUser.password || ''}
-            onChange={handleInputChange}
-          />
           <div className="flex gap-4 mt-4">
             <button
               className="bg-blue-600 text-white p-2 rounded-lg shadow-md hover:bg-blue-700 transition"
@@ -248,40 +232,40 @@ const UserManagementComponent: React.FC = () => {
       )}
 
       <div className="overflow-x-auto">
-        <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
-          <thead>
-            <tr className="bg-gray-200 border-b border-gray-300">
-              <th className="p-3 text-left text-gray-700">User ID</th>
-              <th className="p-3 text-left text-gray-700">Image</th>
-              <th className="p-3 text-left text-gray-700">Full Name</th>
-              <th className="p-3 text-left text-gray-700">Email</th>
-              <th className="p-3 text-left text-gray-700">Phone Number</th>
-              <th className="p-3 text-left text-gray-700">Role</th>
-              <th className="p-3 text-left text-gray-700">Address</th>
-              <th className="p-3 text-left text-gray-700">Actions</th>
+        <table className="min-w-full bg-white border border-gray-300 shadow-md">
+          <thead className="bg-gray-200 border-b">
+            <tr>
+              <th className="p-3 text-left">ID</th>
+              <th className="p-3 text-left">Name</th>
+              <th className="p-3 text-left">Email</th>
+              <th className="p-3 text-left">Address</th>
+              <th className="p-3 text-left">Phone Number</th>
+              <th className="p-3 text-left">Role</th>
+              <th className="p-3 text-left">Image URL</th>
+              <th className="p-3 text-left">Actions</th>
             </tr>
           </thead>
           <tbody>
             {filteredUsers.map((user) => (
-              <tr key={user.id} className="border-b border-gray-300">
-                <td className="p-3 text-gray-700">{user.id}</td>
-                <td className="p-3">
-                  <img src={user.image_url} alt={user.full_name} className="w-12 h-12 rounded-full object-cover" />
+              <tr key={user.id}>
+                <td className="p-3 border-b">{user.id}</td>
+                <td className="p-3 border-b">{user.full_name}</td>
+                <td className="p-3 border-b">{user.email}</td>
+                <td className="p-3 border-b">{user.address}</td>
+                <td className="p-3 border-b">{user.phone_number}</td>
+                <td className="p-3 border-b">{user.role}</td>
+                <td className="p-3 border-b">
+                  <img src={user.image_url || 'https://randomuser.me/api/portraits/men/1.jpg'} alt={user.full_name} className="w-16 h-16 object-cover rounded" />
                 </td>
-                <td className="p-3 text-gray-700">{user.full_name}</td>
-                <td className="p-3 text-gray-700">{user.email}</td>
-                <td className="p-3 text-gray-700">{user.phone_number}</td>
-                <td className="p-3 text-gray-700">{user.role}</td>
-                <td className="p-3 text-gray-700">{user.address}</td>
-                <td className="p-3 flex gap-2">
+                <td className="p-3 border-b">
                   <button
-                    className="bg-yellow-500 text-white p-2 rounded-lg shadow-md hover:bg-yellow-600 transition"
+                    className="bg-yellow-500 text-white p-2 rounded-lg shadow-md hover:bg-yellow-600 transition mr-2"
                     onClick={() => handleEdit(user)}
                   >
                     Edit
                   </button>
                   <button
-                    className="bg-red-600 text-white p-2 rounded-lg shadow-md hover:bg-red-700 transition"
+                    className="bg-red-500 text-white p-2 rounded-lg shadow-md hover:bg-red-600 transition"
                     onClick={() => handleDelete(user.id)}
                   >
                     Delete

@@ -21,7 +21,7 @@ const CustomerTicketsComponent: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   // Fetch the authorization token from local storage or context
-  const token = localStorage.getItem('token'); // or however you store your token
+  const token = localStorage.getItem('authToken'); // or however you store your token
 
   useEffect(() => {
     const fetchTickets = async () => {
